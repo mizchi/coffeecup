@@ -9,7 +9,7 @@
     "url": "git://github.com/gradus/coffeecup.git"
   },
   "dependencies": {
-    "coffee-script": ">=1.3 <2",
+    "coffee-script": "1.7.1",
     "optparse": "1.0.3",
     "uglify-js": "1.2.6",
     "stylus": "0.27.2"
@@ -19,7 +19,7 @@
     "eco": "1.1.0-rc-1",
     "ejs": "0.4.3",
     "haml": "0.4.2",
-    "mocha": "1.2.2",
+    "mocha": "1.17.*",
     "should": "0.6.0"
   },
   "keywords": [

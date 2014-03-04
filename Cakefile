@@ -12,7 +12,7 @@ red = `'\033[0;31m'`
 
 # Internal Functions
 #
-# ## *walk* 
+# ## *walk*
 #
 # **given** string as dir which represents a directory in relation to local directory
 # **and** callback as done in the form of (err, results)
@@ -37,8 +37,8 @@ walk = (dir, done) ->
         results.push file
         done(null, results) unless --pending
 
-# ## *log* 
-# 
+# ## *log*
+#
 # **given** string as a message
 # **and** string as a color
 # **and** optional string as an explaination
@@ -75,10 +75,12 @@ build = (watch, callback) ->
   launch 'coffee', options, callback
 
 test = (callback) ->
-  spec = spawn './node_modules/mocha/bin/mocha'
-  spec.stdout.on 'data', (data) -> print data.toString()
-  spec.stderr.on 'data', (data) -> log data.toString(), red
-  spec.on 'exit', (status) -> callback?() if status is 0
+  exec './node_modules/mocha/bin/mocha --compilers coffee:coffee-script/register', (err, stdout, stderr) ->
+    if stderr
+      console.log stderr
+      callback(true)
+    console.log stdout
+    callback(false)
 
 run = (args...) ->
   for a in args
