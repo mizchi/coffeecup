@@ -1,6 +1,6 @@
 #!/usr/bin/env coffee
 
-coffeecup = require './src/coffeecup'
+coffeecup = require '../src/coffeecup'
 jade = require 'jade'
 ejs = require 'ejs'
 eco = require 'eco'

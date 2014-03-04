@@ -1,6 +1,6 @@
 #!/usr/bin/env coffee
 
-coffeecup = require './src/coffeecup'
+coffeecup = require '../src/coffeecup'
 log = console.log
 
 data =
