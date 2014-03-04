@@ -27,68 +27,70 @@ CoffeeCup is a templating engine for [node.js](http://nodejs.org) and browsers t
 
 Here's what a template written for CoffeeCup looks like:
 
-    doctype 5
-    html ->
-      head ->
-        meta charset: 'utf-8'
-        title "#{@title or 'Untitled'} | A completely plausible website"
-        meta(name: 'description', content: @description) if @description?
+```coffeescript
+doctype 5
+html ->
+  head ->
+    meta charset: 'utf-8'
+    title "#{@title or 'Untitled'} | A completely plausible website"
+    meta(name: 'description', content: @description) if @description?
 
-        link rel: 'stylesheet', href: '/css/app.css'
+    link rel: 'stylesheet', href: '/css/app.css'
 
-        style '''
-          body {font-family: sans-serif}
-          header, nav, section, footer {display: block}
-        '''
+    style '''
+      body {font-family: sans-serif}
+      header, nav, section, footer {display: block}
+    '''
 
-        comment 'Stylus is supported as well'
+    comment 'Stylus is supported as well'
 
-        stylus '''
-          body
-            margin: 0
-        '''
+    stylus '''
+      body
+        margin: 0
+    '''
 
-        script src: '/js/jquery.js'
+    script src: '/js/jquery.js'
 
-        coffeescript ->
-          $(document).ready ->
-            alert 'Alerts suck!'
-      body ->
-        header ->
-          h1 @title or 'Untitled'
+    coffeescript ->
+      $(document).ready ->
+        alert 'Alerts suck!'
+  body ->
+    header ->
+      h1 @title or 'Untitled'
 
-          nav ->
-            ul ->
-              (li -> a href: '/', -> 'Home') unless @path is '/'
-              li -> a href: '/chunky', -> 'Bacon!'
-              switch @user.role
-                when 'owner', 'admin'
-                  li -> a href: '/admin', -> 'Secret Stuff'
-                when 'vip'
-                  li -> a href: '/vip', -> 'Exclusive Stuff'
-                else
-                  li -> a href: '/commoners', -> 'Just Stuff'
+      nav ->
+        ul ->
+          (li -> a href: '/', -> 'Home') unless @path is '/'
+          li -> a href: '/chunky', -> 'Bacon!'
+          switch @user.role
+            when 'owner', 'admin'
+              li -> a href: '/admin', -> 'Secret Stuff'
+            when 'vip'
+              li -> a href: '/vip', -> 'Exclusive Stuff'
+            else
+              li -> a href: '/commoners', -> 'Just Stuff'
 
-        div '#myid.myclass.anotherclass', style: 'position: fixed', ->
-          p 'Divitis kills! Inline styling too.'
+    div '#myid.myclass.anotherclass', style: 'position: fixed', ->
+      p 'Divitis kills! Inline styling too.'
 
-        section ->
-          # A helper function you built and included.
-          breadcrumb separator: '>', clickable: yes
+    section ->
+      # A helper function you built and included.
+      breadcrumb separator: '>', clickable: yes
 
-          h2 "Let's count to 10:"
-          p i for i in [1..10]
+      h2 "Let's count to 10:"
+      p i for i in [1..10]
 
-          # Another hypothetical helper.
-          form_to @post, ->
-            textbox '#title', label: 'Title:'
-            textbox '#author', label: 'Author:'
-            submit 'Save'
+      # Another hypothetical helper.
+      form_to @post, ->
+        textbox '#title', label: 'Title:'
+        textbox '#author', label: 'Author:'
+        submit 'Save'
 
-        footer ->
-          # CoffeeScript comments. Not visible in the output document.
-          comment 'HTML comments.'
-          p 'Bye!'
+    footer ->
+      # CoffeeScript comments. Not visible in the output document.
+      comment 'HTML comments.'
+      p 'Bye!'
+```
 
 Interactive demo at [coffeekup.org](http://coffeekup.org).
 
