@@ -12,7 +12,10 @@
     "coffee-script": "1.7.1",
     "optparse": "1.0.3",
     "uglify-js": "1.2.6",
-    "stylus": "0.27.2"
+    "stylus": "0.27.2",
+    "grunt": "~0.4.2",
+    "grunt-contrib-coffee": "~0.10.1",
+    "grunt-mocha-test": "~0.9.4"
   },
   "devDependencies": {
     "jade": "0.13.0",
@@ -35,7 +38,7 @@
     "node": "0.4.x || 0.6.x || 0.8.x || 0.10.x"
   },
   "scripts": {
-    "test": "./node_modules/mocha/bin/mocha"
+    "test": "./node_modules/mocha/bin/mocha --compilers coffee:coffee-script/register"
   },
   "contributors": [
     "Kris Windham <kriswindham@gmail.com>",
