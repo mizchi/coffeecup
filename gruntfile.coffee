@@ -5,6 +5,6 @@ module.exports = (grunt) ->
       options:
         bare: true
       files:
-        'src/coffeekup.coffee': 'lib/coffeekup.coffee'
-        'src/compiler.coffee' : 'lib/compiler.coffee'
-        'src/cli.coffee'      : 'lib/cli.coffee'
+        'src/coffeekup.coffee': 'lib/coffeekup.js'
+        'src/compiler.coffee' : 'lib/compiler.js'
+        'src/cli.coffee'      : 'lib/cli.js'
