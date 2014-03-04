@@ -10,33 +10,6 @@ green = `'\033[0;32m'`
 reset = `'\033[0m'`
 red = `'\033[0;31m'`
 
-# Internal Functions
-#
-# ## *walk*
-#
-# **given** string as dir which represents a directory in relation to local directory
-# **and** callback as done in the form of (err, results)
-# **then** recurse through directory returning an array of files
-walk = (dir, done) ->
-  results = []
-  fs.readdir dir, (err, list) ->
-    return done(err, []) if err
-    pending = list.length
-    return done(null, results) unless pending
-    for name in list
-      file = "#{dir}/#{name}"
-      try
-        stat = fs.statSync file
-      catch err
-        stat = null
-      if stat?.isDirectory()
-        walk file, (err, res) ->
-          results.push name for name in res
-          done(null, results) unless --pending
-      else
-        results.push file
-        done(null, results) unless --pending
-
 # ## *log*
 #
 # **given** string as a message
@@ -97,13 +70,6 @@ run = (args...) ->
   cmd.stderr.on 'data', (data) -> process.stderr.write data
   process.on 'SIGHUP', -> cmd.kill()
   cmd.on 'exit', (code) -> callback() if callback? and code is 0
-
-# ## *docco*
-#
-# **given** optional function as callback
-# **then** invoke launch passing docco command
-docco = (callback) ->
-  walk 'src', (err, files) -> launch 'docco', files, callback
 
 # Cakefile Tasks
 #
