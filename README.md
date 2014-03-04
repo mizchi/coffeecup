@@ -1,25 +1,34 @@
 # CoffeeCup <☕/>
 ## Markup as CoffeeScript
 
-This is a clone of @gradus [CoffeeCup](https://github.com/gradus/coffeekup).
+This is a fork of @gradus [CoffeeCup](https://github.com/gradus/coffeekup).
 
-To Build by grunt and apply bower.
+To Build by grunt and apply bower. I love this project but original coffeecup is not maintained.
 
+## Install and Use
 
-## Install
-
-node
-
-```
-    npm install coffeecup
-```
-
-bower
+### npm
 
 ```
-    bower install git@github.com:mizchi/coffeecup.git
+$ npm install git@github.com:mizchi/coffeecup.git
 ```
 
+```coffeescript
+cc = require 'coffeecup'
+cc.render -> h1 "You can feed me templates as functions."
+```
+
+### bower
+
+```
+$ bower install coffeekup #=> mizchi/coffeekup
+```
+
+Unfortunately, original coffeekup project is not active now so I(mizchi) added.
+
+```coffeescript
+coffeecup.render -> h1 "You can feed me templates as functions."
+```
 
 ## What's this?
 
@@ -92,62 +101,26 @@ html ->
       p 'Bye!'
 ```
 
-Interactive demo at [coffeekup.org](http://coffeekup.org).
+See command line help by `npm install -g git@github.com:mizchi/coffeecup.git` and exec `coffeecup -h`
 
-Use compiler directly in code.
+## Precompiling
 
-    cc = require 'coffeecup'
-    cc.render -> h1 "You can feed me templates as functions."
-    cc.render "h1 'Or strings. I am not too picky.'"
+```
+template = cc.compile(template, locals: yes, hardcode: {zig: 'zag'})
+template(foo: 'bar', locals: {ping: 'pong'})
+```
 
-Defining variables:
+Exec bench by `./bench/benchmark` if you want to know more.
 
-    template = ->
-      h1 @title
-      form method: 'post', action: 'login', ->
-        textbox id: 'username'
-        textbox id: 'password'
-        button @title
+## for Express
 
-    helpers =
-      textbox: (attrs) ->
-        attrs.type = 'text'
-        attrs.name = attrs.id
-        input attrs
+[express](http://expressjs.com):
 
-    cc.render(template, title: 'Log In', hardcode: helpers)
+```
+app.set('view engine', 'coffee')
+app.engine 'coffee', require('coffeecup').__express
 
-Precompiling to functions:
-
-    template = cc.compile(template, locals: yes, hardcode: {zig: 'zag'})
-    template(foo: 'bar', locals: {ping: 'pong'})
-
-With [express](http://expressjs.com):
-
-    app.set('view engine', 'coffee')
-    app.engine 'coffee', require('coffeecup').__express
-
-    app.get '/', (req, res) ->
-      # Will render views/index.coffee:
-      res.render 'index', foo: 'bar'
-
-Command-line:
-
-    $ coffeecup -h
-
-    Usage:
-      coffeecup [options] path/to/template.coffee
-
-          --js           compile template to js function
-      -n, --namespace    global object holding the templates (default: "templates")
-      -w, --watch        watch templates for changes, and recompile
-      -o, --output       set the directory for compiled html
-      -p, --print        print the compiled html to stdout
-      -f, --format       apply line breaks and indentation to html output
-      -u, --utils        add helper locals (currently only "render")
-      -v, --version      display CoffeeCup version
-      -h, --help         display this help message
-
-See [/examples](http://github.com/gradus/coffeekup/tree/master/examples) for complete versions (you have to run `cake build` first).
-
-Please note that even though all examples are given in CoffeeScript, you can also use their plain JavaScript counterparts just fine.
+app.get '/', (req, res) ->
+  # Will render views/index.coffee:
+  res.render 'index', foo: 'bar'
+```
