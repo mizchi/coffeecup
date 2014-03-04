@@ -1,0 +1,17 @@
+{
+  "name": "coffeecup",
+  "main": "lib/coffeecup.js",
+  "version": "0.3.21",
+  "homepage": "https://github.com/mizchi/coffeecup",
+  "authors": [
+    "Koutarou Chikuba <miz404@gmail.com>"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}
